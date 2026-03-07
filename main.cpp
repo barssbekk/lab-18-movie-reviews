@@ -27,7 +27,6 @@ int main() {
     // askReviewRating();
     Node* head{nullptr};
     addFront(head, 51);
-    printNode(head);
     addTail(head, 20);
     printNode(head);
 
@@ -44,7 +43,7 @@ void askReviewRating() {
     getline(cin, userComments);
 }
 
-// Adds note at the head
+// Adds node at the head
 void addFront(Node*& head, const double value) {
     Node* newNode{new Node};
     if (!head) {
@@ -58,16 +57,20 @@ void addFront(Node*& head, const double value) {
     }
 }
 
+// Adds node at the tail
 void addTail(Node*& head, const double value) {
     Node* newNode{new Node};
-    Node* current{head};
-    while (current) {
-        current = current->next;
-        if (current->next == nullptr) {
-            current->next = newNode;
-            newNode->value = value;
-            newNode->next = nullptr;
+    newNode->value = value;
+    newNode->next = nullptr;
+
+    if (!head) {
+        head = newNode;
+    } else {
+        Node* current = head;
+        while (current->next) {
+            current = current->next;
         }
+        current->next = newNode;
     }
 }
 
