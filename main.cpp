@@ -45,13 +45,12 @@ int main() {
 }
 
 Review askReviewRating() {
-    double userInput{};
+    Review userInput{};
     cout << "Enter review rating 0-5: ";
-    cin >> userInput;
+    cin >> userInput.rating;
     cin.ignore();
     cout << "Enter review comments: ";
-    string userComments{};
-    getline(cin, userComments);
+    getline(cin, userInput.comment);
 }
 
 // Adds node at the head
