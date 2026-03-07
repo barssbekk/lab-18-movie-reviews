@@ -2,7 +2,7 @@
 
 using namespace std;
 
-
+void askReviewRating();
 int main() {
     cout << "Which linked list method should we use?'\n"
          << "\t[1] New nodes are added at the head of the linked list\n"
@@ -15,12 +15,17 @@ int main() {
         cin >> userChoice;
     }
 
-    cout << "Enter review rating 0-5: ";
-    cin >> userChoice;
+    askReviewRating();
 
     return 0;
 }
 
 void askReviewRating() {
-    
+    double userInput{};
+    cout << "Enter review rating 0-5: ";
+    cin >> userInput;
+    cin.ignore();
+    cout << "Enter review comments: ";
+    string userComments{};
+    getline(cin, userComments);
 }
