@@ -31,14 +31,18 @@ int main() {
 
     Node* head{nullptr};
     Review review = askReviewRating();
-    addFront(head, review);
+    if (userChoice == 1) {
+        addFront(head, review);
+    } else {
+        addTail(head, review);
+    }
+
+    cout << "Enter another review? Y/N:";
+    char yesNoChoice{};
+    cin >> yesNoChoice;
+
 
     printNode(head);
-
-    // Node* head{nullptr};
-    // addFront(head, 51);
-    // addTail(head, 20);
-    // printNode(head);
 
     return 0;
 }
@@ -68,7 +72,7 @@ void addFront(Node*& head, Review& value) {
 }
 
 // Adds node at the tail
-void addTail(Node*& head, const Review& value) {
+void addTail(Node*& head, Review& value) {
     Node* newNode{new Node};
     newNode->value = value;
     newNode->next = nullptr;
