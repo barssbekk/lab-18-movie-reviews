@@ -29,11 +29,8 @@ int main() {
         cin >> userChoice;
     }
 
-    askReviewRating();
-    cout << askReviewRating().comment;
-
-
-
+    Review review = askReviewRating();
+    Node* head{nullptr};
 
 
 
