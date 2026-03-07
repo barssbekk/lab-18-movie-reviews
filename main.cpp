@@ -2,7 +2,14 @@
 
 using namespace std;
 
+struct Node {
+    double value{};
+    Node* next{};
+};
+
 void askReviewRating();
+void addFront(Node*& head, double value);
+
 int main() {
     cout << "Which linked list method should we use?'\n"
          << "\t[1] New nodes are added at the head of the linked list\n"
@@ -16,6 +23,7 @@ int main() {
     }
 
     askReviewRating();
+    Node* head{nullptr};
 
     return 0;
 }
@@ -28,4 +36,11 @@ void askReviewRating() {
     cout << "Enter review comments: ";
     string userComments{};
     getline(cin, userComments);
+}
+
+// Adds note at the head
+void addFront(Node*& head, double value) {
+    Node* newNode = new Node;
+    head = newNode;
+    newNode->next = nullptr;
 }
