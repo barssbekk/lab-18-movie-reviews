@@ -86,8 +86,13 @@ void addTail(Node*& head, const Review& value) {
 
 void printNode(Node* head) {
     Node* current{head};
+    static int s_count{1};
+    cout << "Outputting all reviews:\n";
     while (current) {
-        cout << current->value.c << '\n';
+        cout << "\t > Review #" << s_count << ": "
+                                << current->value.rating << ": "
+                                << current->value.comment << '\n';
         current = current->next;
+        ++s_count;
     }
 }
