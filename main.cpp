@@ -10,6 +10,7 @@ struct Node {
 void askReviewRating();
 void addFront(Node*& head, double value);
 void printNode(Node* head);
+void addTail(Node*& head, double value);
 
 int main() {
     // cout << "Which linked list method should we use?'\n"
@@ -23,7 +24,7 @@ int main() {
     //     cin >> userChoice;
     // }
 
-    askReviewRating();
+    // askReviewRating();
     Node* head{nullptr};
     addFront(head, 51);
     printNode(head);
@@ -43,7 +44,7 @@ void askReviewRating() {
 
 // Adds note at the head
 void addFront(Node*& head, const double value) {
-    Node* newNode = new Node;
+    Node* newNode{new Node};
     if (!head) {
         head = newNode;
         newNode->value = value;
@@ -52,6 +53,14 @@ void addFront(Node*& head, const double value) {
         newNode->value = value;
         newNode->next = head;
         head = newNode;
+    }
+}
+
+void addTail(Node*& head, const double value) {
+    Node* newNode{new Node};
+    Node* current{head};
+    if (head) {
+        current = current->next;
     }
 }
 
