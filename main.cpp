@@ -28,6 +28,8 @@ int main() {
     Node* head{nullptr};
     addFront(head, 51);
     printNode(head);
+    addTail(head, 20);
+    printNode(head);
 
     return 0;
 }
@@ -59,8 +61,13 @@ void addFront(Node*& head, const double value) {
 void addTail(Node*& head, const double value) {
     Node* newNode{new Node};
     Node* current{head};
-    if (head) {
+    while (current) {
         current = current->next;
+        if (current->next == nullptr) {
+            current->next = newNode;
+            newNode->value = value;
+            newNode->next = nullptr;
+        }
     }
 }
 
