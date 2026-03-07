@@ -2,20 +2,20 @@
 
 using namespace std;
 
-struct Node {
-    double value{};
-    Node* next{};
-};
-
 struct Review {
     double rating{};
     string comment{};
 };
 
+struct Node {
+    Review value{};
+    Node* next{};
+};
+
 Review askReviewRating();
-void addFront(Node*& head, double value);
+void addFront(Node*& head, Review& value);
 void printNode(Node* head);
-void addTail(Node*& head, double value);
+void addTail(Node*& head, Review& value);
 
 int main() {
     cout << "Which linked list method should we use?'\n"
@@ -29,10 +29,11 @@ int main() {
         cin >> userChoice;
     }
 
-    Review review = askReviewRating();
     Node* head{nullptr};
+    Review review = askReviewRating();
+    addFront(head, review);
 
-
+    printNode(head);
 
     // Node* head{nullptr};
     // addFront(head, 51);
@@ -53,7 +54,7 @@ Review askReviewRating() {
 }
 
 // Adds node at the head
-void addFront(Node*& head, const double value) {
+void addFront(Node*& head, Review& value) {
     Node* newNode{new Node};
     if (!head) {
         head = newNode;
@@ -67,7 +68,7 @@ void addFront(Node*& head, const double value) {
 }
 
 // Adds node at the tail
-void addTail(Node*& head, const double value) {
+void addTail(Node*& head, const Review& value) {
     Node* newNode{new Node};
     newNode->value = value;
     newNode->next = nullptr;
@@ -86,7 +87,7 @@ void addTail(Node*& head, const double value) {
 void printNode(Node* head) {
     Node* current{head};
     while (current) {
-        cout << current->value << '\n';
+        cout << current->value.c << '\n';
         current = current->next;
     }
 }
