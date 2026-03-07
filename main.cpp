@@ -30,6 +30,7 @@ int main() {
     }
 
     askReviewRating();
+    cout << askReviewRating().comment;
 
 
 
@@ -51,6 +52,7 @@ Review askReviewRating() {
     cin.ignore();
     cout << "Enter review comments: ";
     getline(cin, userInput.comment);
+    return userInput;
 }
 
 // Adds node at the head
