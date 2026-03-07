@@ -44,8 +44,15 @@ void askReviewRating() {
 // Adds note at the head
 void addFront(Node*& head, double value) {
     Node* newNode = new Node;
-    head = newNode;
-    newNode->next = nullptr;
+    if (!head) {
+        head = newNode;
+        newNode->value = value;
+        newNode->next = nullptr;
+    } else {
+        newNode->value = value;
+        newNode->next = head;
+        head = newNode;
+    }
 }
 
 void printNode(Node*& head) {
