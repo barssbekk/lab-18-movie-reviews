@@ -97,7 +97,7 @@ double calcAvg(Node* head) {
     double sum{};
     int count{0};
 
-    Node* current = head;
+    const Node* current = head;
     while (current) {
         sum += current->value.rating;
         current = current->next;
@@ -124,7 +124,7 @@ void printNode(Node* head) {
 }
 
 void deleteList(Node*& head) {
-    Node* current = head;
+    const Node* current = head;
     while (current) {
         head = current->next;
         delete current;
