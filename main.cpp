@@ -32,23 +32,20 @@ int main() {
     }
 
     Node* head{nullptr};
-    Review review = askReviewRating();
-    if (userChoice == 1) {
-        addFront(head, review);
-    } else {
-        addTail(head, review);
-    }
 
-    // ADD: tolower/upper
-    cout << "Enter another review? Y/N:";
     char yesNoChoice{};
     cin >> yesNoChoice;
     yesNoChoice = tolower(yesNoChoice);
     // FIX: maybe add while here, and doesn't ask again and print properly
-    while (yesNoChoice == 'y') {
-        askReviewRating();
-        cin >> yesNoChoice;
-    }
+    do {
+        Review review = askReviewRating();
+        if (userChoice == 1)
+            addFront(head, review);
+        else
+            addTail(head, review);
+        cout << "Enter "
+
+    } while (userChoice == 'y');
 
     printNode(head);
 
