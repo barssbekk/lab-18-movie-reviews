@@ -18,14 +18,14 @@ Review askReviewRating();
 void addFront(Node*& head, Review& value);
 void printNode(Node* head);
 void addTail(Node*& head, Review& value);
-double calcAvg(Node*& head);
+double calcAvg(Node* head);
 
 int main() {
     cout << "Which linked list method should we use?'\n"
          << "\t[1] New nodes are added at the head of the linked list\n"
          << "\t[2] New nodes are added at the tail of the linked list\n"
          << "Choice: ";
-    double userChoice{};
+    int userChoice{};
     cin >> userChoice;
     while (userChoice < 1 || userChoice > 2) {
         cerr << "Wrong input! Choose 1 or 2. Try again: ";
@@ -40,12 +40,11 @@ int main() {
             addFront(head, review);
         else
             addTail(head, review);
-        cout << "Enter Enter another review? Y/N: ";
+        cout << "Enter another review? Y/N: ";
         cin >> yesNoChoice;
         yesNoChoice = static_cast<char>(tolower(yesNoChoice));
     } while (yesNoChoice == 'y');
 
-    cout << "avg: " << calcAvg(head);
     printNode(head);
 
     return 0;
@@ -92,9 +91,24 @@ void addTail(Node*& head, Review& value) {
     }
 }
 
+double calcAvg(Node* head) {
+    double sum{};
+    int count{0};
+
+    Node* current = head;
+    while (current) {
+        sum += current->value.rating;
+        current = current->next;
+        ++count;
+    }
+    if (count == 0) return 0;
+    return sum / count; // Return avg
+}
+
 void printNode(Node* head) {
     Node* current{head};
     static int s_count{1};
+    double avg = calcAvg(head);
     cout << "Outputting all reviews:\n";
     while (current) {
         cout << "\t > Review #" << s_count << ": "
@@ -103,16 +117,5 @@ void printNode(Node* head) {
         current = current->next;
         ++s_count;
     }
-}
-
-double calcAvg(Node*& head) {
-    double sum{};
-    double count{1};
-    while (head) {
-        sum += head->value.rating;
-        head = head->next;
-        ++count;
-    }
-    const double avg{sum / count};
-    return avg;
+    cout << "\t > Average rating: " << avg << '\n';
 }
