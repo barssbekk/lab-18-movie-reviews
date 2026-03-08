@@ -18,6 +18,7 @@ Review askReviewRating();
 void addFront(Node*& head, Review& value);
 void printNode(Node* head);
 void addTail(Node*& head, Review& value);
+double calcAvg(Node*& head);
 
 int main() {
     cout << "Which linked list method should we use?'\n"
@@ -30,23 +31,21 @@ int main() {
         cerr << "Wrong input! Choose 1 or 2. Try again: ";
         cin >> userChoice;
     }
-
     Node* head{nullptr};
 
-    char yesNoChoice{};
-    cin >> yesNoChoice;
-    yesNoChoice = tolower(yesNoChoice);
-    // FIX: maybe add while here, and doesn't ask again and print properly
+    char yesNoChoice{'y'};
     do {
         Review review = askReviewRating();
         if (userChoice == 1)
             addFront(head, review);
         else
             addTail(head, review);
-        cout << "Enter "
+        cout << "Enter Enter another review? Y/N: ";
+        cin >> yesNoChoice;
+        yesNoChoice = static_cast<char>(tolower(yesNoChoice));
+    } while (yesNoChoice == 'y');
 
-    } while (userChoice == 'y');
-
+    cout << "avg: " << calcAvg(head);
     printNode(head);
 
     return 0;
@@ -104,4 +103,16 @@ void printNode(Node* head) {
         current = current->next;
         ++s_count;
     }
+}
+
+double calcAvg(Node*& head) {
+    double sum{};
+    double count{1};
+    while (head) {
+        sum += head->value.rating;
+        head = head->next;
+        ++count;
+    }
+    const double avg{sum / count};
+    return avg;
 }
