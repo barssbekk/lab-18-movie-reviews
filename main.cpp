@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <iomanip>
 
 using namespace std;
 
@@ -15,10 +16,11 @@ struct Node {
 };
 
 Review askReviewRating();
-void addFront(Node*& head, Review& value);
+void addFront(Node*& head, const Review& value);
 void printNode(Node* head);
-void addTail(Node*& head, Review& value);
+void addTail(Node*& head, const Review& value);
 double calcAvg(Node* head);
+void deleteList(Node*& head);
 
 int main() {
     cout << "Which linked list method should we use?'\n"
@@ -46,7 +48,7 @@ int main() {
     } while (yesNoChoice == 'y');
 
     printNode(head);
-
+    deleteList(head);
     return 0;
 }
 
@@ -61,7 +63,7 @@ Review askReviewRating() {
 }
 
 // Adds node at the head
-void addFront(Node*& head, Review& value) {
+void addFront(Node*& head, const Review& value) {
     Node* newNode{new Node};
     if (!head) {
         head = newNode;
@@ -75,7 +77,7 @@ void addFront(Node*& head, Review& value) {
 }
 
 // Adds node at the tail
-void addTail(Node*& head, Review& value) {
+void addTail(Node*& head, const Review& value) {
     Node* newNode{new Node};
     newNode->value = value;
     newNode->next = nullptr;
@@ -107,15 +109,26 @@ double calcAvg(Node* head) {
 
 void printNode(Node* head) {
     Node* current{head};
-    static int s_count{1};
-    double avg = calcAvg(head);
+    int count{1};
+    const double avg = calcAvg(head);
     cout << "Outputting all reviews:\n";
     while (current) {
-        cout << "\t > Review #" << s_count << ": "
+        cout << "\t > Review #" << count << ": "
                                 << current->value.rating << ": "
                                 << current->value.comment << '\n';
         current = current->next;
-        ++s_count;
+        ++count;
     }
-    cout << "\t > Average rating: " << avg << '\n';
+    cout << fixed << setprecision(2)
+         << "\t > Average rating: " << avg << '\n';
+}
+
+void deleteList(Node*& head) {
+    Node* current = head;
+    while (current) {
+        head = current->next;
+        delete current;
+        current = head;
+    }
+    head = nullptr;
 }
