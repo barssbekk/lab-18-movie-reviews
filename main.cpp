@@ -37,9 +37,16 @@ int main() {
         addTail(head, review);
     }
 
+    // ADD: tolower/upper
     cout << "Enter another review? Y/N:";
     char yesNoChoice{};
     cin >> yesNoChoice;
+    tolower(yesNoChoice);
+    // FIX: maybe add while here, and doesn't ask again and print properly
+    if (yesNoChoice == 'y') {
+        askReviewRating();
+    }
+
 
 
     printNode(head);
