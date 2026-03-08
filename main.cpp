@@ -23,7 +23,7 @@ double calcAvg(Node* head);
 void deleteList(Node*& head);
 
 int main() {
-    cout << "Which linked list method should we use?'\n"
+    cout << "Which linked list method should we use?\n"
          << "\t[1] New nodes are added at the head of the linked list\n"
          << "\t[2] New nodes are added at the tail of the linked list\n"
          << "Choice: ";
@@ -44,7 +44,7 @@ int main() {
             addTail(head, review);
         cout << "Enter another review? Y/N: ";
         cin >> yesNoChoice;
-        yesNoChoice = static_cast<char>(tolower(yesNoChoice));
+        yesNoChoice = static_cast<char>(tolower(yesNoChoice)); // int to char
     } while (yesNoChoice == 'y');
 
     printNode(head);
@@ -52,6 +52,8 @@ int main() {
     return 0;
 }
 
+// asks the user for a review rating and comment
+// returns: Review struct with rating and comment
 Review askReviewRating() {
     Review userInput{};
     cout << "Enter review rating 0-5: ";
@@ -63,6 +65,7 @@ Review askReviewRating() {
 }
 
 // Adds node at the head
+// arguments: head pointer, review value to add
 void addFront(Node*& head, const Review& value) {
     Node* newNode{new Node};
     if (!head) {
@@ -77,6 +80,7 @@ void addFront(Node*& head, const Review& value) {
 }
 
 // Adds node at the tail
+// arguments: head pointer, review value to add
 void addTail(Node*& head, const Review& value) {
     Node* newNode{new Node};
     newNode->value = value;
@@ -93,6 +97,8 @@ void addTail(Node*& head, const Review& value) {
     }
 }
 
+// calcs the avg rating of all reviews in the list
+// returns: avg rating as a double
 double calcAvg(Node* head) {
     double sum{};
     int count{0};
@@ -107,6 +113,7 @@ double calcAvg(Node* head) {
     return sum / count; // Return avg
 }
 
+// outputs all nodes
 void printNode(Node* head) {
     Node* current{head};
     int count{1};
@@ -123,8 +130,10 @@ void printNode(Node* head) {
          << "\t > Average rating: " << avg << '\n';
 }
 
+// deletes all nodes in the list and frees memory
+// arguments: head pointer to the list
 void deleteList(Node*& head) {
-    const Node* current = head;
+    Node* current = head;
     while (current) {
         head = current->next;
         delete current;
